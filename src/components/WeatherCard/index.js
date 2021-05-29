@@ -2,21 +2,21 @@ import React from 'react';
 
 import { Container } from './styles';
 
-import imgWeather from '../../assets/Shower.png';
+import weatherIcons from '../../utils/weatherIcons';
 
-function WeatherCard() {
+function WeatherCard({ data }) {  
   return (
     <Container>
-      <div className="day">Tomorrow</div>
+      <div className="day">{ data.applicable_date }</div>
 
       <img 
-        src={imgWeather}
+        src={weatherIcons[data.weather_state_abbr]}
         alt="Weather"
       />
 
       <div className="temperatures">
-        <span className="max">27ºC</span>
-        <span className="min">10ºc</span>
+        <span className="max">{Math.round(data.max_temp)}ºc</span>
+        <span className="min">{Math.round(data.min_temp)}ºc</span>
       </div>
     </Container>
   );

@@ -4,12 +4,14 @@ import Home from './views/Home';
 
 import GlobalStyle from './styles/globalStyle';
 
+import { WeatherProvider } from './context/WeatherContext';
+
 function App() {
   return (
-    <Fragment>
+    <WeatherProvider>
       <Home />
       <GlobalStyle />
-    </Fragment>
+    </WeatherProvider>
   );
 }
 

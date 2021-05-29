@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Container, Row, WeatherImage, WeatherInformation, Toggle } from './styles';
 
 import { BiCurrentLocation } from 'react-icons/bi';
 
-import imgWeather from '../../assets/Shower.png';
-import imgBackground from '../../assets/Cloud-background.png';
+import { WeatherContext } from '../../context/WeatherContext';
+
+import weatherIcons from '../../utils/weatherIcons';
 
 function Sidebar() {
   const [toggle, setToggle] = useState(false);
+
+  const { loading, forecast } = useContext(WeatherContext);
+
+  if(!forecast) {
+    return 0;
+  }
 
   return (
     <Container>
@@ -28,28 +35,22 @@ function Sidebar() {
 
       <WeatherImage>
         <img
-          src={imgWeather}
+          src={weatherIcons[forecast.consolidated_weather[0].weather_state_abbr]}
           alt='Weather'
           className='img-weather'
-        />
-
-        <img
-          src={imgBackground}
-          alt='Background'
-          className="img-background"
         />
       </WeatherImage>
 
       <WeatherInformation>
         <div className="temperature">
-          <span>15</span> ºc
+          <span>{Math.round(forecast.consolidated_weather[0].the_temp)}</span> ºc
         </div>
 
-        <div className="weather">Shower</div>
+        <div className="weather">{forecast.consolidated_weather[0].weather_state_name}</div>
 
         <div className="footer">
           <div className="today">Today <span>-</span> Fri. 5 Jun</div>
-          <div className="location">Helsinki</div>
+          <div className="location">{forecast.title}</div>
         </div>
       </WeatherInformation>
     </Container>

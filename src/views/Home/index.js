@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Sidebar from '../../components/Sidebar';
 import WeatherCard from '../../components/WeatherCard';
-import StatusCard from '../../components/StatusCard';
 
-import { Container, Content, Wrapper, Select, Forecast, Today, Status } from './styles';
+import { Container, Content, Wrapper, Select, Forecast, Today, Status, StatusCard } from './styles';
+
+import { WeatherContext } from '../../context/WeatherContext';
 
 function Home() {
+  const { loading, forecast } = useContext(WeatherContext);
+
+  if(!forecast) return 0;
+
   return (
     <Container>
       <Sidebar />
@@ -18,21 +23,70 @@ function Home() {
           </Select>
 
           <Forecast>
-            <WeatherCard />
-            <WeatherCard />
-            <WeatherCard />
-            <WeatherCard />
-            <WeatherCard />
+            <WeatherCard data={forecast.consolidated_weather[1]} />
+            <WeatherCard data={forecast.consolidated_weather[2]} />
+            <WeatherCard data={forecast.consolidated_weather[3]} />
+            <WeatherCard data={forecast.consolidated_weather[4]} />
+            <WeatherCard data={forecast.consolidated_weather[5]} />
           </Forecast>
 
           <Today>
             <div className="title">Today’s Hightlights </div>
 
             <Status>
-              <StatusCard />
-              <StatusCard />
-              <StatusCard />
-              <StatusCard />
+              <StatusCard>
+                <div className="title">Wind status</div>
+
+                <div className="status">
+                  <span>{Math.round(forecast.consolidated_weather[0].wind_speed)}</span> mph
+                </div>
+
+                <div className="wind">
+                  <div className="direction"></div>
+                  <span>wsw</span>
+                </div>
+              </StatusCard>
+
+              <StatusCard>
+                <div className="title">Humidity</div>
+
+                <div className="status">
+                  <span>{Math.round(forecast.consolidated_weather[0].humidity)}</span> %
+                </div>
+
+                <div className="bar-container">
+                  <div className="percentages">
+                    <span>0</span>
+                    <span>50</span>
+                    <span>100</span>
+                  </div>
+
+                  <div className="progress-bar">
+                    <div 
+                      className="progress" 
+                      style={{ width: `${Math.round(forecast.consolidated_weather[0].humidity)}%` }} 
+                    />
+                  </div>
+
+                  <div className="percentage">%</div>
+                </div>
+              </StatusCard>
+
+              <StatusCard>
+                <div className="title">Visibility</div>
+
+                <div className="status">
+                  <span>{Math.round(forecast.consolidated_weather[0].visibility)}</span> miles
+                </div>
+              </StatusCard>
+
+              <StatusCard>
+                <div className="title">Air pressure</div>
+
+                <div className="status">
+                  <span>{Math.round(forecast.consolidated_weather[0].air_pressure)}</span> mb
+                </div>
+              </StatusCard>
             </Status>
           </Today>
         </Wrapper>

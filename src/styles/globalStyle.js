@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     --text-primary: #fafafa;
     --text-secondary: #A09FB1;
     --button-color: #6E707A;
-
+    --progress-color: #FFEC65;
   }
 
   html {
