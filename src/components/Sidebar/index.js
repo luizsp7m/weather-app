@@ -8,14 +8,12 @@ import { WeatherContext } from '../../context/WeatherContext';
 
 import weatherIcons from '../../utils/weatherIcons';
 
+import { format } from 'date-fns';
+
 function Sidebar() {
   const [toggle, setToggle] = useState(false);
 
   const { loading, forecast } = useContext(WeatherContext);
-
-  if(!forecast) {
-    return 0;
-  }
 
   return (
     <Container>
@@ -29,7 +27,7 @@ function Sidebar() {
         <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
 
         <button className="geo-location">
-          <BiCurrentLocation size={20} />
+          <BiCurrentLocation size={24} />
         </button>
       </Row>
 
@@ -49,7 +47,7 @@ function Sidebar() {
         <div className="weather">{forecast.consolidated_weather[0].weather_state_name}</div>
 
         <div className="footer">
-          <div className="today">Today <span>-</span> Fri. 5 Jun</div>
+          <div className="today">Today <span>•</span> {format(new Date(`${forecast.time}`), 'E. dd MMM')}</div>
           <div className="location">{forecast.title}</div>
         </div>
       </WeatherInformation>

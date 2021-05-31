@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 1fr 2fr;
   min-height: 100vh;
 `;
 
@@ -24,10 +24,11 @@ export const Select = styled.div`
 
   > button {
     border-radius: 50%;
-    height: 3.6rem;
-    width: 3.6rem;
+    height: 4.2rem;
+    width: 4.2rem;
     background: var(--primary-color);
     color: var(--text-primary);
+    font-size: 1.5rem;
     font-weight: 700;
     cursor: pointer;
   }

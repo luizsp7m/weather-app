@@ -4,10 +4,14 @@ import { Container } from './styles';
 
 import weatherIcons from '../../utils/weatherIcons';
 
+import { format } from 'date-fns';
+
 function WeatherCard({ data }) {  
+  const date = data.applicable_date;
+
   return (
     <Container>
-      <div className="day">{ data.applicable_date }</div>
+      <div className="day">{ format(new Date(`${date}T00:00:00`), 'E. dd MMM') }</div>
 
       <img 
         src={weatherIcons[data.weather_state_abbr]}

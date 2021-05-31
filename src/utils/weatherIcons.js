@@ -17,8 +17,8 @@ const weatherIcons = {
   'hr': HeavyRain,
   'lr': LightRain,
   's': Shower,
-  'hc': HeavyRain,
-  'lc': LightRain,
+  'hc': HeavyCloud,
+  'lc': LightCloud,
   'c': Clear,
 };
 
