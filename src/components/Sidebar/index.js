@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 
 import { Container, Row, WeatherImage, WeatherInformation, Toggle } from './styles';
 
@@ -10,6 +10,8 @@ import weatherIcons from '../../utils/weatherIcons';
 
 import { format } from 'date-fns';
 
+import { Puff } from 'react-loading-icons';
+
 function Sidebar() {
   const [toggle, setToggle] = useState(false);
 
@@ -17,40 +19,44 @@ function Sidebar() {
 
   return (
     <Container>
-      { toggle && (
-        <Toggle>
-          <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
-        </Toggle>
+      { loading ? <Puff style={{ margin: '0 auto' }} /> : (
+        <Fragment>
+          { toggle && (
+            <Toggle>
+              <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
+            </Toggle>
+          )}
+
+          <Row>
+            <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
+
+            <button className="geo-location">
+              <BiCurrentLocation size={24} />
+            </button>
+          </Row>
+
+          <WeatherImage>
+            <img
+              src={weatherIcons[forecast.consolidated_weather[0].weather_state_abbr]}
+              alt='Weather'
+              className='img-weather'
+            />
+          </WeatherImage>
+
+          <WeatherInformation>
+            <div className="temperature">
+              <span>{Math.round(forecast.consolidated_weather[0].the_temp)}</span> ºc
+        </div>
+
+            <div className="weather">{forecast.consolidated_weather[0].weather_state_name}</div>
+
+            <div className="footer">
+              <div className="today">Today <span>•</span> {format(new Date(`${forecast.time}`), 'E. dd MMM')}</div>
+              <div className="location">{forecast.title}</div>
+            </div>
+          </WeatherInformation>
+        </Fragment>
       )}
-
-      <Row>
-        <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
-
-        <button className="geo-location">
-          <BiCurrentLocation size={24} />
-        </button>
-      </Row>
-
-      <WeatherImage>
-        <img
-          src={weatherIcons[forecast.consolidated_weather[0].weather_state_abbr]}
-          alt='Weather'
-          className='img-weather'
-        />
-      </WeatherImage>
-
-      <WeatherInformation>
-        <div className="temperature">
-          <span>{Math.round(forecast.consolidated_weather[0].the_temp)}</span> ºc
-        </div>
-
-        <div className="weather">{forecast.consolidated_weather[0].weather_state_name}</div>
-
-        <div className="footer">
-          <div className="today">Today <span>•</span> {format(new Date(`${forecast.time}`), 'E. dd MMM')}</div>
-          <div className="location">{forecast.title}</div>
-        </div>
-      </WeatherInformation>
     </Container>
   );
 }

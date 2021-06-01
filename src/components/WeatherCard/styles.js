@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   background: var(--primary-color);
   padding: 2rem 1rem;
-  color: var(--text-primary);
+  color: #E7E7EB;
   font-size: 1.55rem;
   font-weight: 500;
 
@@ -15,10 +15,10 @@ export const Container = styled.div`
   }
 
   > img {
-    width: 100%;
-    max-width: 5rem;
-    height: auto;
-    margin: 1rem 0;
+    height: 100%;
+    max-height: 6rem;
+    width: auto;
+    margin: 1rem 0 2.5rem 0;
   }
 
   > div.temperatures {

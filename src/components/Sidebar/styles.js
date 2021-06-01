@@ -2,15 +2,19 @@ import styled from 'styled-components';
 import bgImage from '../../assets/Cloud-background.png';
 
 export const Container = styled.div`
-  width: 100%;
+  width: 40rem;
+  height: 100%;
   background: var(--primary-color);
-  position: relative;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 export const Row = styled.div`
   display: flex;
   justify-content: space-around;
-  padding: 3rem 0;
+  /* padding: 3rem 0; */
 
   > button {
     background: var(--button-color);
@@ -21,7 +25,7 @@ export const Row = styled.div`
 
   > button.search-places {
     padding: 1rem 2rem;
-    font-size: 1.6rem;
+    font-size: 1.35rem;
   }
 
   > button.geo-location {
@@ -38,7 +42,7 @@ export const WeatherImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6rem 0;
+  /* padding: 6rem 0; */
   position: relative;
 
   &::after {
@@ -55,7 +59,7 @@ export const WeatherImage = styled.div`
 
   > img.img-weather {
     width: 100%;
-    max-width: 20rem;
+    max-width: 15rem;
     height: auto;
   }
 `
@@ -67,10 +71,10 @@ export const WeatherInformation = styled.div`
 
   > div.temperature {
     color: var(--text-secondary);
-    font-size: 5rem;
+    font-size: 3rem;
     
     > span {
-      font-size: 16rem;
+      font-size: 9rem;
       font-weight: 500;
       color: var(--text-primary);
     }
@@ -78,8 +82,8 @@ export const WeatherInformation = styled.div`
 
   > div.weather {
     color: var(--text-secondary);
-    font-size: 3.6rem;
-    margin: 8rem 0;
+    font-size: 2rem;
+    margin: 2rem 0;
     font-weight: 600;
   }
 
@@ -88,12 +92,12 @@ export const WeatherInformation = styled.div`
     flex-direction: column;
     align-items: center;
     color: var(--text-secondary);
-    font-size: 1.8rem;
+    font-size: 1.45rem;
     font-weight: 500;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 
     > div.today {
-      margin-bottom: 1rem;
+      /* margin-bottom: 1rem; */
 
       > span {
         margin: 0 1rem;
@@ -114,5 +118,5 @@ export const Toggle = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  background: red;
+  background: green;
 `

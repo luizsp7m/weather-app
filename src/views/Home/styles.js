@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 2fr;
   min-height: 100vh;
 `;
 
 export const Content = styled.div`
-
+  width: calc(100% - 40rem);
+  margin-left: 40rem;
 `
 
 export const Wrapper = styled.div`
-  width: 75%;
+  width: 80%;
   height: 100%;
   margin: 0 auto;
 `
@@ -24,11 +23,11 @@ export const Select = styled.div`
 
   > button {
     border-radius: 50%;
-    height: 4.2rem;
-    width: 4.2rem;
+    height: 3.6rem;
+    width: 3.6rem;
     background: var(--primary-color);
     color: var(--text-primary);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
     cursor: pointer;
   }
@@ -46,11 +45,12 @@ export const Forecast = styled.div`
 `
 
 export const Today = styled.div`
-  padding: 4rem 0;
+  padding: 5rem 0;
 
   > div.title {
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: .1rem;
     font-size: 1.8rem;
     margin-bottom: 3rem;
   }
@@ -67,25 +67,42 @@ export const StatusCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   padding: 2rem;
   color: var(--text-primary);
 
   > div.title {
-    font-size: 1.45rem;
+    font-size: 1.9rem;
   }
 
   > div.status {
     margin: 1rem 0;
-    font-size: 2rem;
+    font-size: 3rem;
 
     > span {
       font-weight: 700;
-      font-size: 5rem;
+      font-size: 6rem;
     }
   }
 
   > div.wind {
-    font-size: 1.35rem;
+    font-size: 1.55rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    text-transform: lowercase;
+
+    > div.direction {
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
   }
 
   > div.bar-container {
