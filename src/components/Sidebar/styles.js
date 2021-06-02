@@ -42,7 +42,7 @@ export const WeatherImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding: 6rem 0; */
+  padding: 4rem 0; 
   position: relative;
 
   &::after {
@@ -118,5 +118,63 @@ export const Toggle = styled.div`
   bottom: 0;
   right: 0;
   left: 0;
-  background: green;
+  background: var(--primary-color);
+  padding: 2rem;
+
+  > div.close-sidebar {
+    text-align: right;
+    cursor: pointer;
+  }
+
+  > div.search {
+    display: flex;
+    margin: 2rem 0;
+    gap: 1rem;
+
+    > div.input-group {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--text-primary);
+      padding: 0 1rem;
+      width: 100%;
+
+      > input {
+        height: 4rem;
+        padding: 0 2rem 0 2rem;
+        font-size: 1.35rem;
+        width: 100%;
+        color: var(--text-secondary);
+      }
+    }
+
+    > button {
+      color: var(--text-primary);
+      background-color: #3C47E9;
+      padding: 0 2rem;
+      cursor: pointer;
+    }
+  }
+
+  > div.cities {
+    margin: 3rem 0;
+
+    > h3 {
+      color: var(--text-secondary);
+    }
+
+    > div.city {
+      color: var(--text-primary);
+      font-size: 1.35rem;
+      opacity: .85;
+      margin: 1rem 0;
+      padding: 1.5rem 1rem;
+      border: 1px solid rgba(0, 0, 0, 0);
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid var(--text-secondary);
+      }
+    }
+  }
+
 `

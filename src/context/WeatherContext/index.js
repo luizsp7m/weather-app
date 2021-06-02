@@ -6,31 +6,53 @@ const WeatherContext = createContext();
 
 function WeatherProvider({ children }) {
   const [position, setPosition] = useState([]);
-  const [location, setLocation] = useState('455827');
+  const [woeid, setWoeid] = useState('455827');
   const [loading, setLoading] = useState(true);
   const [forecast, setForecast] = useState();
+  const [cities, setCities] = useState([]);
+  const [loadingSearch, setLoadingSearch] = useState(false);
+
+  async function searchCity(value) {
+    setLoadingSearch(true);
+    await api.get(`/location/search/?query=${value}`).then(response => {
+      setCities(response.data);
+      setLoadingSearch(false);
+    });
+  }
 
   async function loadForecast() {
     setLoading(true);
-    await api.get(`/location/${location}/`).then(response => {
+    await api.get(`/location/${woeid}/`).then(response => {
       setForecast(response.data);
       setLoading(false)
     });
   }
 
-  useEffect(() => {
-    loadForecast();
-
+  function geoLocation() {
     navigator.geolocation.getCurrentPosition(position => {
       setPosition(position.coords.latitude, position.coords.longitude);
     }, error => {
-      console.log('Não permitiu');
+      setPosition(undefined);
     });
+  }
 
-  }, [location]);
+  async function loadLattLong() {
+    console.log(position);
+    await api.get(`/location/search/?lattlong=${position[0]},${position[1]}`).then(response => {
+      console.log(response.data);
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  useEffect(() => {
+    geoLocation();
+    loadLattLong();
+    loadForecast();
+  }, [woeid]);
 
   return (
-    <WeatherContext.Provider value={{ loading, forecast }}>
+    <WeatherContext.Provider value={{ loading, forecast, searchCity, cities, setWoeid, loadingSearch }}>
       { children}
     </WeatherContext.Provider>
   );
