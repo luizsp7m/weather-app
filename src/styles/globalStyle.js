@@ -34,6 +34,11 @@ const GlobalStyle = createGlobalStyle`
     background: var(--background);
   }
 
+  @media(max-width: 425px) {
+    html {
+      font-size: 56.25%;
+    }
+  }
 `
 
 export default GlobalStyle;

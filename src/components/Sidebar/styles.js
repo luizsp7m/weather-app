@@ -9,6 +9,18 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  @media(max-width: 700px) {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+  }
+
+  @media(max-height: 530px) {
+    position: relative;
+    width: 100%;
+    height: 225vh;
+  }
 `;
 
 export const Row = styled.div`
@@ -156,7 +168,7 @@ export const Toggle = styled.div`
   }
 
   > div.cities {
-    margin: 3rem 0;
+    margin: 3rem 0; 
 
     > h3 {
       color: var(--text-secondary);

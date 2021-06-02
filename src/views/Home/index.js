@@ -12,17 +12,24 @@ import { IoMdArrowRoundUp } from 'react-icons/io'
 import { Puff } from 'react-loading-icons';
 
 function Home() {
-  const { loading, forecast } = useContext(WeatherContext);
+  const { loading, forecast, measurement, setMeasurement } = useContext(WeatherContext);
 
   return (
     <Container>
       <Sidebar />
       <Content>
-        {loading ? <Puff style={{ margin: '0 auto' }} /> : (
+        {loading ? <div className="loading"><Puff style={{ margin: '0 auto' }} /></div> : (
           <Wrapper>
             <Select>
-              <button className="selected">ºC</button>
-              <button>ºF</button>
+              <button
+                className={measurement === 'Celsius' ? 'selected' : ''}
+                onClick={() => setMeasurement('Celsius')}
+              >ºC</button>
+
+              <button
+                className={measurement === 'Farenheit' ? 'selected' : ''}
+                onClick={() => setMeasurement('Farenheit')}
+              >ºF</button>
             </Select>
 
             <Forecast>
@@ -41,10 +48,20 @@ function Home() {
                   <div className="title">Wind status</div>
 
                   <div className="status">
-                    <span>
-                      {Math.round(forecast.consolidated_weather[0].wind_speed)}
-                    </span> mph
-                    </div>
+                    {measurement === 'Celsius' ? (
+                      <>
+                        <span>
+                          {Math.round(forecast.consolidated_weather[0].wind_speed * 1,609)}
+                        </span> kmh
+                      </>
+                    ) : (
+                        <>
+                          <span>
+                            {Math.round(forecast.consolidated_weather[0].wind_speed)}
+                          </span> mph
+                      </>
+                      )}
+                  </div>
 
                   <div className="wind">
                     <div className="direction">
@@ -93,7 +110,16 @@ function Home() {
                   <div className="title">Visibility</div>
 
                   <div className="status">
-                    <span>{Math.round(forecast.consolidated_weather[0].visibility)}</span> miles
+                    { measurement === 'Celsius' ? (
+                      <>
+                        <span>{Math.round(forecast.consolidated_weather[0].visibility * 1,609)} </span> 
+                        kilom.
+                      </>
+                    ) : (
+                      <>
+                        <span>{Math.round(forecast.consolidated_weather[0].visibility)}</span> miles
+                      </>
+                    ) }
                 </div>
                 </StatusCard>
 

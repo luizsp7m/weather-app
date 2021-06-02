@@ -2,11 +2,28 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   min-height: 100vh;
+
+  @media(max-width: 700px) {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Content = styled.div`
   width: calc(100% - 40rem);
   margin-left: 40rem;
+
+  > div.loading {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  @media(max-width: 700px) {
+    width: 100%;
+    margin: 0;
+  }
 `
 
 export const Wrapper = styled.div`
@@ -40,7 +57,7 @@ export const Select = styled.div`
 
 export const Forecast = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   grid-gap: 2rem;
 `
 
@@ -60,6 +77,10 @@ export const Status = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
+
+  @media(max-width: 998px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const StatusCard = styled.div`

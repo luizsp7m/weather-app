@@ -5,12 +5,12 @@ import api from '../../services/api';
 const WeatherContext = createContext();
 
 function WeatherProvider({ children }) {
-  const [position, setPosition] = useState([]);
-  const [woeid, setWoeid] = useState('455827');
+  const [woeid, setWoeid] = useState();
   const [loading, setLoading] = useState(true);
   const [forecast, setForecast] = useState();
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(null);
   const [loadingSearch, setLoadingSearch] = useState(false);
+  const [measurement, setMeasurement] = useState('Celsius');
 
   async function searchCity(value) {
     setLoadingSearch(true);
@@ -18,6 +18,21 @@ function WeatherProvider({ children }) {
       setCities(response.data);
       setLoadingSearch(false);
     });
+  }
+
+  function currentPosition() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(async position => {
+        await api.get(`/location/search/?lattlong=${position.coords.latitude}, ${position.coords.longitude}`)
+          .then(response => {
+            setWoeid(response.data[0].woeid);
+          });
+      }, error => {
+        setWoeid(2487956);
+      });
+    } else {
+      alert("I'm sorry, but geolocation services are not supported by your browser.");
+    }
   }
 
   async function loadForecast() {
@@ -28,31 +43,26 @@ function WeatherProvider({ children }) {
     });
   }
 
-  function geoLocation() {
-    navigator.geolocation.getCurrentPosition(position => {
-      setPosition(position.coords.latitude, position.coords.longitude);
-    }, error => {
-      setPosition(undefined);
-    });
-  }
-
-  async function loadLattLong() {
-    console.log(position);
-    await api.get(`/location/search/?lattlong=${position[0]},${position[1]}`).then(response => {
-      console.log(response.data);
-    }).catch(err => {
-      console.log(err);
-    });
-  }
+  useEffect(() => {
+    currentPosition();
+  }, []);
 
   useEffect(() => {
-    geoLocation();
-    loadLattLong();
-    loadForecast();
+    if (woeid) loadForecast();
   }, [woeid]);
 
   return (
-    <WeatherContext.Provider value={{ loading, forecast, searchCity, cities, setWoeid, loadingSearch }}>
+    <WeatherContext.Provider value={{
+      loading,
+      forecast,
+      searchCity,
+      cities,
+      setWoeid,
+      loadingSearch,
+      currentPosition,
+      measurement,
+      setMeasurement
+    }}>
       { children}
     </WeatherContext.Provider>
   );

@@ -10,7 +10,7 @@ import weatherIcons from '../../utils/weatherIcons';
 
 import { format } from 'date-fns';
 
-import { Puff } from 'react-loading-icons';
+import { TailSpin } from 'react-loading-icons';
 
 import { AiOutlineSearch } from 'react-icons/ai';
 import { RiCloseLine } from 'react-icons/ri'
@@ -18,7 +18,15 @@ import { RiCloseLine } from 'react-icons/ri'
 function Sidebar() {
   const [toggle, setToggle] = useState(false);
 
-  const { loading, forecast, searchCity, cities, setWoeid, loadingSearch } = useContext(WeatherContext);
+  const { 
+    loading, 
+    forecast, 
+    searchCity, 
+    cities, 
+    setWoeid, 
+    currentPosition,
+    measurement
+  } = useContext(WeatherContext);
 
   const [search, setSearch] = useState();
 
@@ -49,29 +57,31 @@ function Sidebar() {
             </div>
 
             <div className="cities">
-              {cities.length === 0 ? <h3>No results found</h3> : cities.map(city => (
-                <div
-                  className="city"
-                  key={city.woeid}
-                  onClick={() => setWoeid(city.woeid)}
-                >
-                  {city.title}
-                </div>
-              ))}
+              {!cities ? '' : (
+                cities.length === 0 ? <h3>No results found</h3> : cities.map(city => (
+                  <div
+                    className="city"
+                    key={city.woeid}
+                    onClick={() => setWoeid(city.woeid)}
+                  >
+                    {city.title}
+                  </div>
+                ))
+              )}
             </div>
           </Toggle>
         )}
 
-        <Row>
-          <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
-
-          <button className="geo-location">
-            <BiCurrentLocation size={24} />
-          </button>
-        </Row>
-
-        {loading ? <Puff style={{ margin: '0 auto' }} /> : (
+        {loading ? <TailSpin stroke="#fafafa" strokeOpacity=".5" style={{ margin: '0 auto' }} /> : (
           <>
+            <Row>
+              <button className="search-places" onClick={() => setToggle(!toggle)}>Search for places</button>
+
+              <button className="geo-location" onClick={() => currentPosition()}>
+                <BiCurrentLocation size={24} />
+              </button>
+            </Row>
+
             <WeatherImage>
               <img
                 src={weatherIcons[forecast.consolidated_weather[0].weather_state_abbr]}
@@ -82,7 +92,17 @@ function Sidebar() {
 
             <WeatherInformation>
               <div className="temperature">
-                <span>{Math.round(forecast.consolidated_weather[0].the_temp)}</span> ºc
+                { measurement === 'Celsius' ? (
+                  <>
+                    <span>{Math.round(forecast.consolidated_weather[0].the_temp)}</span> ºC
+                  </>
+                ) : (
+                  <>
+                    <span>{Math.round(
+                      (forecast.consolidated_weather[0].the_temp * 9/5) + 32
+                    )}</span> ºF
+                  </>
+                ) }
               </div>
 
               <div className="weather">
