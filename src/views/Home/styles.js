@@ -158,3 +158,19 @@ export const StatusCard = styled.div`
     }
   }
 `
+
+export const Footer = styled.div`
+  padding: 2rem 0;
+
+  > h1 {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.35rem;
+    font-weight: 600;
+
+    > a {
+      color: var(--text-secondary);
+      font-weight: 700;
+    }
+  }
+`

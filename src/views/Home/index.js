@@ -1,9 +1,9 @@
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import Sidebar from '../../components/Sidebar';
 import WeatherCard from '../../components/WeatherCard';
 
-import { Container, Content, Wrapper, Select, Forecast, Today, Status, StatusCard } from './styles';
+import { Container, Content, Wrapper, Select, Forecast, Today, Status, StatusCard, Footer } from './styles';
 
 import { WeatherContext } from '../../context/WeatherContext';
 
@@ -132,6 +132,14 @@ function Home() {
                 </StatusCard>
               </Status>
             </Today>
+
+            <Footer>
+              <h1>
+                Created by <a 
+                  href="https://github.com/luizsp7m" 
+                  target="_blank" rel="noreferrer">Luiz</a> - devChallenges.io
+              </h1>
+            </Footer>
           </Wrapper>
         )}
       </Content>
