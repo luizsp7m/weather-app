@@ -1,8 +1,8 @@
-# devChallenges - Weather APP
+# devChallenges - Weather App
 
-This is a solution to the [Weather APP](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv).
+This is a solution to the [Weather App](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv).
 
-##### [Site URL](https://weather-app-pi-mauve.vercel.app/) 
+##### [Site URL](https://weather-app-pi-mauve.vercel.app/) :construction:
 ##### [Solution](https://devchallenges.io/solutions/shhgkdePIOBE3Q5rsaOF)
 
 ### The challenge
@@ -22,7 +22,7 @@ Create a weather app using an API. Fulfill user stories below:
 - User story(optional): I can request my current location weather
 - User story(optional): I can convert temperature in Celcius to Fahrenheit and vice versa
 
-![](https://i.imgur.com/NnwJDKy.png)
+![](https://github.com/luizsp7m/weather-app/blob/master/design/Result.gif)
 
 ### Built with
 - [React](https://reactjs.org/) - JS library
