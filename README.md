@@ -2,7 +2,9 @@
 
 This is a solution to the [Weather App](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv).
 
-##### [Site URL](https://weather-app-pi-mauve.vercel.app/) :construction:
+###### Visit [CORS Anywhere](https://cors-anywhere.herokuapp.com/corsdemo) and click on button for accessing data
+
+##### [Site URL](https://weather-app-pi-mauve.vercel.app/)
 ##### [Solution](https://devchallenges.io/solutions/shhgkdePIOBE3Q5rsaOF)
 
 ### The challenge
